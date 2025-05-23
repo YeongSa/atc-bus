@@ -5,8 +5,8 @@
 }
 
 body {
-  background-color: #1a1b1e;
-  color: #fff;
+  background-color: var(--bg-main-dark);
+  color: var(--text-main);
 }
 
 #root {
@@ -17,19 +17,19 @@ body {
 
 .app {
   width: 90%;
-  max-width: 480px;
+  max-width: 460px;
   height: 100%;
-  padding: 2rem;
+  padding: 2px 2rem;
   margin: auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-direction: column;
   text-align: center;
 }
 
 header {
-  padding: 1rem;
-  background-color: #2c2e33;
+  padding-bottom: 0.5rem;
+  background-color: var(--bg-secondary-dark);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
 }
@@ -41,12 +41,12 @@ header h1 {
 
 header p {
   font-size: 0.875rem;
-  color: #a1a1aa;
+  color: var(--text-dim);
 }
 
 header a {
-  background-color: #3f4146;
-  color: #a1a1aa;
+  background-color: var(--bg-element-dark);
+  color: var(--text-dim);
   text-decoration: none;
   margin: 0.5rem 0.5rem 0;
   padding: 0.25rem 0.5rem;
@@ -56,11 +56,11 @@ header a {
 }
 
 header a:hover {
-  color: #ffffff;
+  color: var(--text-main);
 }
 
 header a.active {
-  background-color: #0066cc;
-  color: #ffffff;
+  background-color: var(--selected);
+  color: var(--text-main);
   font-weight: 500;
 }

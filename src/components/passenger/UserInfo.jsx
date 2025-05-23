@@ -13,7 +13,7 @@ const UserInfo = () => {
   return (
     <div className="user-info">
       <div className="date">
-        <p>Текущая дата:</p>
+        <p>Сегодня:</p>
         <span>{currentDate}</span>
       </div>
 

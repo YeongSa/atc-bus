@@ -5,13 +5,10 @@
 
   /* dark theme */
   --bg-main-dark: #1a1b1e;
-  --bg-secondary-dark: ##2c2e33;
-  --bg-element-dark: ##3f4147;
+  --bg-secondary-dark: #2c2e33;
+  --bg-element-dark: #3f4147;
   --selected: #0066cc;
   --selected2: #1e40af;
+  --text-main: #fff;
   --text-dim: #a1a1aa;
-}
-
-body {
-  background-color: var(--bg-main-dark);
 }

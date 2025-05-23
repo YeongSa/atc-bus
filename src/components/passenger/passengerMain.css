@@ -1,0 +1,135 @@
+.passenger-main {
+  background-color: var(--bg-secondary-dark);
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin-top: 1rem;
+}
+
+.date-container {
+  margin-top: 1rem;
+  border: 2px solid var(--bg-element-dark);
+  border-radius: 8px;
+  padding: 0.75rem;
+}
+
+.date-container h2,
+.search-container h2 {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.day {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border-bottom: 1px solid var(--bg-element-dark);
+}
+
+.shift {
+  width: 80%;
+  margin: 2px auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border-top: 1px solid var(--bg-element-dark);
+}
+
+.shift-selected {
+  color: var(--selected);
+  scale: 1.1;
+}
+
+.search-container {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.search-container input {
+  height: 2rem;
+  width: 100%;
+  border-radius: 16px;
+  outline: none;
+  border: none;
+  background-color: var(--bg-element-dark);
+  padding: 1.2rem 1rem;
+}
+
+.stop-list {
+  height: 300px;
+  overflow-y: scroll;
+}
+
+.stop-item {
+  background-color: var(--bg-element-dark);
+  border-radius: 8px;
+  padding: 0.5rem;
+  margin-bottom: 0.75rem;
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+.stop-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Custom scrollbar for Webkit browsers */
+.stop-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.stop-list::-webkit-scrollbar-track {
+  background: #3f4147;
+  border-radius: 8x;
+}
+
+.stop-list::-webkit-scrollbar-thumb {
+  background-color: #60a5fa;
+  border-radius: 8x;
+}
+
+.stop-list::-webkit-scrollbar-thumb:hover {
+  background-color: #3b82f6;
+}
+
+.stop-item:hover {
+  background-color: #4b4c52;
+  transform: translateY(-1px);
+}
+
+.stop-item.selected {
+  background-color: #1e40af;
+  border-color: #60a5fa;
+}
+
+.stop-name {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.preview-section {
+  background-color: var(--bg-element-dark);
+  padding: 0.5rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  margin-top: 1rem;
+}
+
+.stop-preview h3,
+h4 {
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.no-selection {
+  color: #a1a1aa;
+  font-style: italic;
+  text-align: center;
+  padding: 1rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
