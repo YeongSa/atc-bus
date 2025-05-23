@@ -25,9 +25,9 @@ const PassengerMain = () => {
             <span>Завтра</span>
           </div>
           <div className="shift">
-            <span className="shift-selected">Утро</span>
+            <span>Утро</span>
             <span>День</span>
-            <span>Вечер</span>
+            <span className="shift-selected">Вечер</span>
           </div>
         </div>
 

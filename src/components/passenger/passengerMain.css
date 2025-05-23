@@ -19,6 +19,10 @@
   font-weight: 600;
 }
 
+.date-container span {
+  color: var(--text-dim);
+}
+
 .day {
   width: 80%;
   margin: auto;
@@ -37,9 +41,9 @@
   border-top: 1px solid var(--bg-element-dark);
 }
 
-.shift-selected {
-  color: var(--selected);
-  scale: 1.1;
+.date-container .shift-selected {
+  color: var(--text-main);
+  scale: 1.2;
 }
 
 .search-container {
@@ -123,6 +127,22 @@ h4 {
   margin-bottom: 0.5rem;
   font-size: 1rem;
   font-weight: 600;
+}
+
+.stop-preview .timetable {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.stop-preview .time {
+  display: inline-block;
+  border-radius: 8px;
+  padding: 0.15rem 0.2rem;
+  background: #fff;
+  color: var(--bg-main-dark);
+  font-weight: 500;
 }
 
 .no-selection {
