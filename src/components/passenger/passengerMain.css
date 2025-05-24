@@ -61,6 +61,7 @@
   border: none;
   background-color: var(--bg-element-dark);
   padding: 1.2rem 1rem;
+  color: var(--text-main);
 }
 
 .stop-list {
