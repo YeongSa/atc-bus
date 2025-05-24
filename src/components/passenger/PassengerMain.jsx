@@ -7,10 +7,8 @@ const PassengerMain = () => {
   const [selectedStop, setSelectedStop] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredStops = busStops.filter(
-    (stop) =>
-      stop.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      stop.address.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredStops = busStops.filter((stop) =>
+    stop.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
