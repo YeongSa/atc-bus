@@ -79,6 +79,10 @@ const PassengerMain = () => {
           </p>
         )}
       </div>
+
+      <button className="confirm" disabled={!selectedStop}>
+        Подтвердить
+      </button>
     </div>
   );
 };

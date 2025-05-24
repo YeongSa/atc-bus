@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="app">
       <header>
-        <h1>CBUS - Demo 0.2</h1>
+        <h1>ATCBUS - Demo 0.2</h1>
         <p>Просмотр от лица</p>
         <a href="/passenger" className="active">
           Пассажира

@@ -8,18 +8,11 @@ const UserInfo = () => {
     day: "numeric",
   });
 
-  const currentUser = "Иван Иванович";
-
   return (
     <div className="user-info">
       <div className="date">
         <p>Сегодня:</p>
         <span>{currentDate}</span>
-      </div>
-
-      <div className="user">
-        <p>Пользователь:</p>
-        <span>{currentUser}</span>
       </div>
     </div>
   );
