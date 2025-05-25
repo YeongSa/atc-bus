@@ -49,7 +49,7 @@ const UserInfo = () => {
                 <p>
                   Автобус будет в -
                   <span>
-                    <span className="user-new-time">05:25</span>
+                    <span className="user-new-time">12:17</span>
                     {/* <span className="user-new-time">05:35</span> */}
                   </span>
                 </p>

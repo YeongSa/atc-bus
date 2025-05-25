@@ -6,6 +6,22 @@ const DriverMain = () => {
   const [selectedDay, setSelectedDay] = useState("today");
   const [selectedShift, setSelectedShift] = useState("morning");
 
+  const today = new Date().toLocaleDateString("ru-RU", {
+    month: "long",
+    day: "numeric",
+  });
+
+  const getTomorrow = () => {
+    const todayDate = new Date();
+    const tomorrow = new Date();
+    tomorrow.setDate(todayDate.getDate() + 1);
+
+    return tomorrow.toLocaleDateString("ru-RU", {
+      month: "long",
+      day: "numeric",
+    });
+  };
+
   return (
     <div className="driverMain">
       <div className="date-selector">
@@ -14,12 +30,14 @@ const DriverMain = () => {
           onClick={() => setSelectedDay("today")}
         >
           Сегодня
+          <p>{today}</p>
         </span>
         <span
           className={selectedDay === "tomorrow" && "active"}
           onClick={() => setSelectedDay("tomorrow")}
         >
           Завтра
+          <p>{getTomorrow()}</p>
         </span>
       </div>
 
