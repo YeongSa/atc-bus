@@ -1,0 +1,61 @@
+.driverMain {
+  background-color: var(--bg-secondary-dark);
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin-top: 1rem;
+}
+
+.date-selector {
+  width: 80%;
+  margin: 2rem auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 1rem;
+}
+
+.date-selector span {
+  background-color: var(--bg-element-dark);
+  width: 100%;
+  border-radius: 8px 8px 0 0;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: var(--text-dim);
+  padding: 0.15rem;
+  border-bottom: 1px solid var(--bg-secondary-dark);
+}
+
+.date-selector span.active {
+  color: var(--text-main);
+  border-bottom: 1px solid var(--bg-element-dark);
+}
+
+.stops {
+  background-color: var(--bg-element-dark);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.stop {
+  background-color: var(--bg-secondary-dark);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.stop .stop-name {
+  font-size: 1rem;
+}
+
+.stop ol {
+  padding: 1rem;
+  text-align: left;
+}
+
+.stop.empty {
+  color: var(--text-dim);
+}
+
+.stop.empty .stop-name {
+  color: var(--text-dim);
+}

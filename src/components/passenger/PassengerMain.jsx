@@ -1,6 +1,6 @@
 import "./passengerMain.css";
 import { busStops } from "../../data";
-import UserInfo from "./UserInfo";
+import UserInfo from "../UserInfo";
 import { useState } from "react";
 
 const PassengerMain = () => {
@@ -67,7 +67,9 @@ const PassengerMain = () => {
             <h4>Автобус будет в:</h4>
             <div className="timetable">
               {selectedStop.times.map((time) => (
-                <span className="time">{time}</span>
+                <span key={time[0]} className="time">
+                  {time}
+                </span>
               ))}
             </div>
           </div>
