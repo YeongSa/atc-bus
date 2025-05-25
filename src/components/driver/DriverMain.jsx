@@ -22,6 +22,8 @@ const DriverMain = () => {
     });
   };
 
+  const confirmer = true;
+
   return (
     <div className="driverMain">
       <div className="date-selector">
@@ -63,7 +65,7 @@ const DriverMain = () => {
           </span>
         </div>
 
-        {busStops.map((stop) => {
+        {busStops.map((stop, index) => {
           return stop.passengers.length > 0 ? (
             <div className="stop " key={stop.id}>
               <div className="stop-info">
@@ -74,6 +76,14 @@ const DriverMain = () => {
                   <li key={passenger}>{passenger}</li>
                 ))}
               </ol>
+              {index === 0 ? (
+                <>
+                  <span className="stop-time-showcase">{stop.times[0]}</span>
+                  <span className="stop-time">05:30</span>
+                </>
+              ) : (
+                <div className="stop-time">{stop.times[0]}</div>
+              )}
             </div>
           ) : (
             <div className="stop empty" key={stop.id}>

@@ -95,3 +95,13 @@ span.day-active {
 .stop.empty .stop-name {
   color: var(--text-dim);
 }
+
+.stop-time {
+  color: green;
+}
+
+.stop-time-showcase {
+  text-decoration: line-through;
+  color: red;
+  margin-right: 1rem;
+}
