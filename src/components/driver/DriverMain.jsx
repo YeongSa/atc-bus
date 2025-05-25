@@ -69,25 +69,52 @@ const DriverMain = () => {
           return stop.passengers.length > 0 ? (
             <div className="stop " key={stop.id}>
               <div className="stop-info">
-                <p className="stop-name">{stop.name}</p>
+                <p className="stop-name">
+                  {stop.name}
+                  {true ? (
+                    <div>
+                      <span className="stop-time-showcase">
+                        {stop.times[0]}
+                      </span>
+                      <span className="stop-time">
+                        {(
+                          "0" +
+                          Math.floor(
+                            (Number(stop.times[0].replace(":", ".")) + 0.1) *
+                              100
+                          ) /
+                            100
+                        ).replace(".", ":")}
+                      </span>
+                    </div>
+                  ) : (
+                    <span className="stop-time">
+                      {(
+                        "0" +
+                        (Number(stop.times[0].replace(":", ".")) + 0.1)
+                      ).replace(".", ":")}
+                    </span>
+                  )}
+                </p>
               </div>
               <ol>
                 {stop.passengers.map((passenger) => (
                   <li key={passenger}>{passenger}</li>
                 ))}
               </ol>
-              {index === 0 ? (
-                <>
-                  <span className="stop-time-showcase">{stop.times[0]}</span>
-                  <span className="stop-time">05:30</span>
-                </>
-              ) : (
-                <div className="stop-time">{stop.times[0]}</div>
-              )}
             </div>
           ) : (
             <div className="stop empty" key={stop.id}>
-              <p className="stop-name">{stop.name}</p>
+              <p className="stop-name">
+                {stop.name}
+                {index ? (
+                  <div>
+                    <span className="stop-time-mute">{stop.times[0]}</span>
+                  </div>
+                ) : (
+                  <span className="stop-time">{stop.times[0]}</span>
+                )}
+              </p>
               <i>Пассажиров еще нет</i>
             </div>
           );

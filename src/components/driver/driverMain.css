@@ -81,6 +81,11 @@ span.day-active {
   font-size: 1rem;
   color: var(--selected);
   border-bottom: 1px solid var(--bg-element-dark);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  gap: 16px;
 }
 
 .stop ol {
@@ -103,5 +108,9 @@ span.day-active {
 .stop-time-showcase {
   text-decoration: line-through;
   color: red;
-  margin-right: 1rem;
+  margin-right: 0.5rem;
+}
+
+.stop-time-mute {
+  color: var(--text-dim);
 }
