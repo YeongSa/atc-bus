@@ -15,7 +15,7 @@ function App() {
         <header>
           <h1>ATCBUS - Demo 0.2</h1>
           <p>Просмотр от лица</p>
-          <NavLink to="/passenger">Пассажира</NavLink>
+          <NavLink to="/">Пассажира</NavLink>
           <NavLink to="/driver">Водителя</NavLink>
         </header>
         <main>
