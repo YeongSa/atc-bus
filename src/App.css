@@ -61,5 +61,4 @@ header a:hover {
 header a.active {
   background-color: var(--selected);
   color: var(--text-main);
-  font-weight: 500;
 }

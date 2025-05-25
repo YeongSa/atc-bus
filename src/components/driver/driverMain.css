@@ -36,6 +36,39 @@
   padding: 1rem;
 }
 
+.day-selector {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+  border: 1px solid #fff;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #000;
+  font-weight: 500;
+}
+
+.day-selector span {
+  width: 33%;
+  background-color: var(--bg-element-dark);
+  color: var(--text-main);
+  padding: 0.25rem;
+  cursor: pointer;
+}
+
+.day-selector span:first-child {
+  border-radius: 8px 0 0 8px;
+}
+
+.day-selector span:last-child {
+  border-radius: 0 8px 8px 0;
+}
+
+span.day-active {
+  background-color: #fff;
+  color: #000;
+}
+
 .stop {
   background-color: var(--bg-secondary-dark);
   border-radius: 8px;
@@ -45,6 +78,8 @@
 
 .stop .stop-name {
   font-size: 1rem;
+  color: var(--selected);
+  border-bottom: 1px solid var(--bg-element-dark);
 }
 
 .stop ol {

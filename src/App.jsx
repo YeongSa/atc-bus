@@ -1,5 +1,10 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  NavLink,
+} from "react-router-dom";
 import PassengerMain from "./components/passenger/PassengerMain";
 import DriverMain from "./components/driver/DriverMain";
 
@@ -10,10 +15,8 @@ function App() {
         <header>
           <h1>ATCBUS - Demo 0.2</h1>
           <p>Просмотр от лица</p>
-          <Link to="/passenger" className="active">
-            Пассажира
-          </Link>
-          <Link to="/driver">Водителя</Link>
+          <NavLink to="/passenger">Пассажира</NavLink>
+          <NavLink to="/driver">Водителя</NavLink>
         </header>
         <main>
           <Routes>

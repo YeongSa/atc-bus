@@ -21,6 +21,8 @@
 
 .date-container span {
   color: var(--text-dim);
+  margin: 0.25rem;
+  padding: 0.25rem;
 }
 
 .day {
@@ -44,7 +46,7 @@
 }
 
 .date-container .shift-selected {
-  color: var(--text-main);
+  color: var(--selected);
   scale: 1.2;
 }
 
@@ -142,10 +144,15 @@ h4 {
 .stop-preview .time {
   display: inline-block;
   border-radius: 8px;
-  padding: 0.15rem 0.2rem;
+  padding: 0.15rem 0.5rem;
   background: #fff;
   color: var(--bg-main-dark);
   font-weight: 500;
+}
+
+.time.time-active {
+  background-color: var(--selected);
+  color: var(--text-main);
 }
 
 .no-selection {
