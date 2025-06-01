@@ -1,68 +1,67 @@
+import { useState } from "react";
+import { busStopsActual } from "../../data";
 import "./userInfo.css";
+import ShiftEditModal from "../modals/ShiftEditModal";
 
-const UserInfo = () => {
-  const shifts = true;
+const UserInfo = ({ user, shiftTable, deleteShift }) => {
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [selectedStop, setSelectedStop] = useState(null);
 
-  const today = new Date().toLocaleDateString("ru-RU", {
-    month: "long",
-    day: "numeric",
-  });
-
-  const getTomorrow = () => {
-    const todayDate = new Date();
-    const tomorrow = new Date();
-    tomorrow.setDate(todayDate.getDate() + 1);
-
-    return tomorrow.toLocaleDateString("ru-RU", {
-      month: "long",
-      day: "numeric",
-    });
-  };
-
-  return (
+  return user ? (
     <div className="userInfo">
       <h2>Ваши смены</h2>
 
       <div className="user-shifts">
-        {shifts ? (
-          <>
-            <div className="user-shift">
-              <div className="date">{today} - Утро</div>
+        {user.stops.length > 0 ? (
+          user.stops.map((stop) => (
+            <div
+              className="user-shift"
+              key={stop.id}
+              onClick={() => {
+                setSelectedStop(stop);
+                setShowEditModal(true);
+              }}
+            >
+              <div className="date">
+                {stop.date} - {shiftTable[stop.shift]}
+              </div>
 
               <div className="user-stop">
-                <p className="user-stop-name">«32-й мкр. ул. 30 лет Победы»</p>
+                <p className="user-stop-name">{stop.stopName}</p>
                 <p>
-                  Автобус будет в -
-                  <span>
-                    <span className="user-time">05:25</span>
-                    <span className="user-new-time">05:35</span>
-                  </span>
+                  Автобус будет в -{" "}
+                  {busStopsActual[stop.stopId].timeChanged[stop.shift] ? (
+                    <span>
+                      <span className="user-time crossed">
+                        {stop.busExpectedTime}
+                      </span>
+                      <span className="user-time">
+                        {busStopsActual[stop.stopId].timeChanged[stop.shift]}
+                      </span>
+                    </span>
+                  ) : (
+                    <span className="user-time">{stop.busExpectedTime}</span>
+                  )}
                 </p>
               </div>
             </div>
-
-            <div className="user-shift">
-              <div className="date">{getTomorrow()} - День</div>
-
-              <div className="user-stop">
-                <p className="user-stop-name">«32-й мкр. ул. 30 лет Победы»</p>
-                <p>
-                  Автобус будет в -
-                  <span>
-                    <span className="user-new-time">12:17</span>
-                    {/* <span className="user-new-time">05:35</span> */}
-                  </span>
-                </p>
-              </div>
-            </div>
-          </>
+          ))
         ) : (
-          <p>
-            <i>Смены еще не выбраны</i>
-          </p>
+          <i>Смены еще не выбраны</i>
         )}
       </div>
+
+      {showEditModal && (
+        <ShiftEditModal
+          setShowEditModal={setShowEditModal}
+          selectedStop={selectedStop}
+          shiftTable={shiftTable}
+          deleteShift={deleteShift}
+        />
+      )}
     </div>
+  ) : (
+    <i>Загружаем...</i>
   );
 };
 

@@ -1,29 +1,56 @@
 import "./passengerMain.css";
-import { busStops } from "../../data";
-import { useState } from "react";
+import { busStops, users } from "../../data";
+import { useEffect, useState } from "react";
 import UserInfo from "./UserInfo";
+import { useTime } from "../../hooks/useTime";
+import ConfirmModal from "../modals/ConfirmModal";
+
+const userData = users[1];
+
+const shiftTable = ["Утро", "День", "Ночь"];
 
 const PassengerMain = () => {
-  const today = new Date().toLocaleDateString("ru-RU", {
-    month: "long",
-    day: "numeric",
-  });
+  const [user, setUser] = useState(null);
 
-  const getTomorrow = () => {
-    const todayDate = new Date();
-    const tomorrow = new Date();
-    tomorrow.setDate(todayDate.getDate() + 1);
-
-    return tomorrow.toLocaleDateString("ru-RU", {
-      month: "long",
-      day: "numeric",
-    });
-  };
+  const { today, tomorrow } = useTime();
 
   const [selectedStop, setSelectedStop] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedDay, setSelectedDay] = useState("");
-  const [selectedShift, setSelectedShift] = useState("");
+  const [selectedDay, setSelectedDay] = useState(null);
+  const [selectedShift, setSelectedShift] = useState(null);
+
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+
+  const reset = () => {
+    setSelectedShift(null);
+    setSelectedDay(null);
+    setSelectedStop(null);
+    setShowConfirmModal(false);
+  };
+
+  const accept = () => {
+    const newStop = {
+      id: Math.random(),
+      date: selectedDay,
+      shift: selectedShift,
+      stopId: selectedStop.id,
+      stopName: selectedStop.name,
+      busExpectedTime: selectedStop.times[selectedShift],
+      selectedAt: new Date(),
+    };
+
+    setUser((prev) => ({ ...prev, stops: [...prev.stops, newStop] }));
+    reset();
+  };
+
+  const deleteShift = (id) => {
+    setUser((prev) => {
+      const stops = prev.stops.filter((stop) => stop.id !== id);
+      return { ...prev, stops };
+    });
+  };
+
+  useEffect(() => setUser(userData), []);
 
   const filteredStops = busStops.filter((stop) =>
     stop.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -31,43 +58,43 @@ const PassengerMain = () => {
 
   return (
     <>
-      <UserInfo />
+      <UserInfo user={user} shiftTable={shiftTable} deleteShift={deleteShift} />
 
       <div className="passenger-main">
         <div className="selection-section">
           <div className="date-container">
             <h2>Выберите смену:</h2>
             <div className="day">
-              <div onClick={() => setSelectedDay("today")}>
-                <span className={selectedDay === "today" && "shift-selected"}>
+              <div onClick={() => setSelectedDay(today)}>
+                <span className={selectedDay === today ? "shift-selected" : ""}>
                   Сегодня
                 </span>
                 <p>{today}</p>
               </div>
-              <div onClick={() => setSelectedDay("tomorrow")}>
+              <div onClick={() => setSelectedDay(tomorrow)}>
                 <span
-                  className={selectedDay === "tomorrow" && "shift-selected"}
+                  className={selectedDay === tomorrow ? "shift-selected" : ""}
                 >
                   Завтра
                 </span>
-                <p>{getTomorrow()}</p>
+                <p>{tomorrow}</p>
               </div>
             </div>
             <div className="shift">
               <span
-                className={selectedShift === 0 && "shift-selected"}
+                className={selectedShift === 0 ? "shift-selected" : ""}
                 onClick={() => setSelectedShift(0)}
               >
                 Утро
               </span>
               <span
-                className={selectedShift === 1 && "shift-selected"}
+                className={selectedShift === 1 ? "shift-selected" : ""}
                 onClick={() => setSelectedShift(1)}
               >
                 День
               </span>
               <span
-                className={selectedShift === 2 && "shift-selected"}
+                className={selectedShift === 2 ? "shift-selected" : ""}
                 onClick={() => setSelectedShift(2)}
               >
                 Ночь
@@ -131,10 +158,29 @@ const PassengerMain = () => {
           )}
         </div>
 
-        <button className="confirm" disabled={!selectedStop}>
-          Подтвердить
+        <button
+          className="confirm"
+          disabled={
+            selectedStop === null ||
+            selectedDay === null ||
+            selectedShift === null
+          }
+          onClick={() => setShowConfirmModal(true)}
+        >
+          Выбрать
         </button>
       </div>
+
+      {showConfirmModal && (
+        <ConfirmModal
+          setShowConfirmModal={setShowConfirmModal}
+          selectedDay={selectedDay}
+          selectedShift={shiftTable[selectedShift]}
+          selectedStop={selectedStop}
+          reset={reset}
+          accept={accept}
+        />
+      )}
     </>
   );
 };

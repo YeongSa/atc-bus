@@ -11,11 +11,17 @@
   margin-top: 0.5rem;
 }
 
+.user-shifts i {
+  width: 100%;
+  text-align: center;
+}
+
 .user-shift {
   background-color: var(--bg-element-dark);
   border-radius: 8px;
   padding: 0.25rem;
   width: 50%;
+  cursor: pointer;
 }
 
 .user-shift .date {
@@ -28,11 +34,11 @@
 }
 
 .user-time {
-  text-decoration: line-through;
-  color: red;
+  color: green;
 }
 
-.user-new-time {
-  color: green;
-  margin-left: 0.5rem;
+.user-time.crossed {
+  text-decoration: line-through;
+  color: red;
+  margin-right: 0.5rem;
 }

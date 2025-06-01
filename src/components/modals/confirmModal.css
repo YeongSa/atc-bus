@@ -1,0 +1,103 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.confirmModal_inner {
+  border-radius: 8px;
+  position: relative;
+  margin: 0 1rem;
+}
+
+.confirmModal_inner .closeBtn {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  border: none;
+  box-shadow: 2px 2px 10px 2px var(--bg-element-dark);
+  cursor: pointer;
+  transition: 1s ease;
+}
+
+.confirmModal_inner .closeBtn:hover {
+  transform: rotate(180deg);
+}
+
+.confirmModal_inner .closeBtn:active {
+  scale: 0.8;
+}
+
+.confirmModal_inner .header {
+  background-color: #fff;
+  width: 100%;
+  border-radius: 8px 8px 0 0;
+  color: var(--selected);
+  padding: 0.5rem;
+}
+
+.confirmModal_inner .header h2 {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.selections {
+  padding: 1rem;
+  background-color: var(--bg-element-dark);
+  border-radius: 0 0 8px 8px;
+  text-align: left;
+}
+
+.selection {
+  padding: 0.5rem;
+}
+
+.selection .label {
+  font-weight: 600;
+  margin-right: 0.4rem;
+}
+
+.btns {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10%;
+}
+
+.btns button {
+  padding: 0.5rem;
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: #fff;
+  transition: background 0.2s;
+  flex: 1 1 0;
+}
+
+.btns .reject {
+  background-color: #dc3545;
+}
+
+.btns .reject:hover {
+  background-color: #a71d2a;
+}
+
+.btns .accept {
+  background-color: var(--selected);
+}
+
+.btns .accept:hover {
+  background-color: #0056b3;
+}
