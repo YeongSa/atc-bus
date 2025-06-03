@@ -1,16 +1,23 @@
 export const useTime = () => {
-  const today = new Date().toLocaleDateString("ru-RU", {
-    month: "long",
-    day: "numeric",
-  });
+  const today = new Date();
 
   const tomorrow = new Date();
   tomorrow.setDate(new Date().getDate() + 1);
 
-  const tomorrowDay = tomorrow.toLocaleDateString("ru-RU", {
-    month: "long",
-    day: "numeric",
-  });
-
-  return { today, tomorrow: tomorrowDay };
+  return {
+    today: {
+      short: today.toLocaleDateString("ru-RU", {
+        month: "long",
+        day: "numeric",
+      }),
+      full: today,
+    },
+    tomorrow: {
+      short: tomorrow.toLocaleDateString("ru-RU", {
+        month: "long",
+        day: "numeric",
+      }),
+      full: tomorrow,
+    },
+  };
 };

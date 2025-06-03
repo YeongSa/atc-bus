@@ -22,14 +22,14 @@ const ShiftEditModal = ({
           <h2>Удалить смену?</h2>
         </div>
 
-        <div className="selections">
+        {/* <div className="selections">
           <div className="selection">
             <span className="label">Остановка:</span>
             <span className="selection_data">{selectedStop.stopName}</span>
           </div>
           <div className="selection">
             <span className="label">Дата:</span>
-            <span className="selection_data">{selectedStop.date}</span>
+            <span className="selection_data">{selectedStop.date.short}</span>
           </div>
           <div className="selection">
             <span className="label">Смена:</span>
@@ -37,7 +37,22 @@ const ShiftEditModal = ({
               {shiftTable[selectedStop.shift]}
             </span>
           </div>
+        </div> */}
+
+        <div className="selections">
+          <p>
+            <span className="text_bubble grey">
+              {shiftTable[selectedStop.shift]}
+            </span>
+            ,{" "}
+            <span className="text_bubble grey">{selectedStop.date.short}</span>{" "}
+          </p>
+          <p className="separator_p">на остановке </p>
+          <p>
+            <span className="text_bubble grey">{selectedStop.stopName}</span>
+          </p>
         </div>
+
         <div className="btns">
           <button className="reject" onClick={handleDelete}>
             Удалить

@@ -5,9 +5,27 @@ const ConfirmModal = ({
   selectedDay,
   selectedShift,
   selectedStop,
+  userStops,
   reset,
   accept,
+  shiftTable,
 }) => {
+  const replacedShift = userStops.filter(
+    (stop) =>
+      new Date(
+        stop.date.full.getFullYear(),
+        stop.date.full.getMonth(),
+        stop.date.full.getDate()
+      ).getTime() ===
+      new Date(
+        selectedDay.full.getFullYear(),
+        selectedDay.full.getMonth(),
+        selectedDay.full.getDate()
+      ).getTime()
+  );
+
+  console.log(replacedShift);
+
   return (
     <div className="modal">
       <div className="confirmModal_inner">
@@ -20,25 +38,51 @@ const ConfirmModal = ({
         </div>
 
         <div className="selections">
-          <div className="selection">
-            <span className="label">Остановка:</span>
-            <span className="selection_data">{selectedStop.name}</span>
-          </div>
-          <div className="selection">
-            <span className="label">Дата:</span>
-            <span className="selection_data">{selectedDay}</span>
-          </div>
-          <div className="selection">
-            <span className="label">Смена:</span>
-            <span className="selection_data">{selectedShift}</span>
-          </div>
+          <p>
+            <span className="text_bubble blue">{selectedShift}</span>,{" "}
+            <span className="text_bubble blue">{selectedDay.short}</span>{" "}
+          </p>
+          <p className="separator_p">на остановке </p>
+          <p>
+            <span className="text_bubble blue">{selectedStop.name}</span>
+          </p>
         </div>
+
+        {replacedShift.length > 0 && (
+          <div className="selections replacement">
+            <h4>Будет заменена следующая смена:</h4>
+            <p>
+              <span className="text_bubble red">
+                {shiftTable[replacedShift[0].shift]}
+              </span>
+              ,{" "}
+              <span className="text_bubble red">
+                {replacedShift[0].date.short}
+              </span>
+            </p>
+            <p className="separator_p">на остановке </p>
+            <p>
+              <span className="text_bubble red">
+                {replacedShift[0].stopName}
+              </span>
+            </p>
+
+            <div className="notice">!</div>
+          </div>
+        )}
 
         <div className="btns">
           <button className="reject" onClick={reset}>
             Отменить
           </button>
-          <button className="accept" onClick={accept}>
+          <button
+            className="accept"
+            onClick={
+              replacedShift.length > 0
+                ? () => accept(true, replacedShift[0].id)
+                : () => accept()
+            }
+          >
             Подтвердить
           </button>
         </div>

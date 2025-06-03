@@ -13,39 +13,41 @@ const UserInfo = ({ user, shiftTable, deleteShift }) => {
 
       <div className="user-shifts">
         {user.stops.length > 0 ? (
-          user.stops.map((stop) => (
-            <div
-              className="user-shift"
-              key={stop.id}
-              onClick={() => {
-                setSelectedStop(stop);
-                setShowEditModal(true);
-              }}
-            >
-              <div className="date">
-                {stop.date} - {shiftTable[stop.shift]}
-              </div>
+          user.stops
+            .sort((a, b) => a.date.full - b.date.full)
+            .map((stop) => (
+              <div
+                className="user-shift"
+                key={stop.id}
+                onClick={() => {
+                  setSelectedStop(stop);
+                  setShowEditModal(true);
+                }}
+              >
+                <div className="date">
+                  {stop.date.short} - {shiftTable[stop.shift]}
+                </div>
 
-              <div className="user-stop">
-                <p className="user-stop-name">{stop.stopName}</p>
-                <p>
-                  Автобус будет в -{" "}
-                  {busStopsActual[stop.stopId].timeChanged[stop.shift] ? (
-                    <span>
-                      <span className="user-time crossed">
-                        {stop.busExpectedTime}
+                <div className="user-stop">
+                  <p className="user-stop-name">{stop.stopName}</p>
+                  <p>
+                    Автобус будет в -{" "}
+                    {busStopsActual[stop.stopId].timeChanged[stop.shift] ? (
+                      <span>
+                        <span className="user-time crossed">
+                          {stop.busExpectedTime}
+                        </span>
+                        <span className="user-time">
+                          {busStopsActual[stop.stopId].timeChanged[stop.shift]}
+                        </span>
                       </span>
-                      <span className="user-time">
-                        {busStopsActual[stop.stopId].timeChanged[stop.shift]}
-                      </span>
-                    </span>
-                  ) : (
-                    <span className="user-time">{stop.busExpectedTime}</span>
-                  )}
-                </p>
+                    ) : (
+                      <span className="user-time">{stop.busExpectedTime}</span>
+                    )}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))
+            ))
         ) : (
           <i>Смены еще не выбраны</i>
         )}

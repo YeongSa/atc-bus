@@ -28,7 +28,7 @@ const PassengerMain = () => {
     setShowConfirmModal(false);
   };
 
-  const accept = () => {
+  const accept = (replaces = false, id) => {
     const newStop = {
       id: Math.random(),
       date: selectedDay,
@@ -39,7 +39,15 @@ const PassengerMain = () => {
       selectedAt: new Date(),
     };
 
-    setUser((prev) => ({ ...prev, stops: [...prev.stops, newStop] }));
+    if (replaces) {
+      setUser((prev) => ({
+        ...prev,
+        stops: prev.stops.map((stop) => (stop.id === id ? newStop : stop)),
+      }));
+    } else {
+      setUser((prev) => ({ ...prev, stops: [...prev.stops, newStop] }));
+    }
+
     reset();
   };
 
@@ -66,18 +74,26 @@ const PassengerMain = () => {
             <h2>Выберите смену:</h2>
             <div className="day">
               <div onClick={() => setSelectedDay(today)}>
-                <span className={selectedDay === today ? "shift-selected" : ""}>
+                <span
+                  className={
+                    selectedDay?.short === today.short ? "shift-selected" : ""
+                  }
+                >
                   Сегодня
                 </span>
-                <p>{today}</p>
+                <p>{today.short}</p>
               </div>
               <div onClick={() => setSelectedDay(tomorrow)}>
                 <span
-                  className={selectedDay === tomorrow ? "shift-selected" : ""}
+                  className={
+                    selectedDay?.short === tomorrow.short
+                      ? "shift-selected"
+                      : ""
+                  }
                 >
                   Завтра
                 </span>
-                <p>{tomorrow}</p>
+                <p>{tomorrow.short}</p>
               </div>
             </div>
             <div className="shift">
@@ -179,6 +195,8 @@ const PassengerMain = () => {
           selectedStop={selectedStop}
           reset={reset}
           accept={accept}
+          userStops={user.stops}
+          shiftTable={shiftTable}
         />
       )}
     </>
