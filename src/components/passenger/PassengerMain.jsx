@@ -1,15 +1,45 @@
 import "./passengerMain.css";
-import { busStops, users } from "../../data";
+import { busStops, users, busStopsActual } from "../../data";
 import { useEffect, useState } from "react";
 import UserInfo from "./UserInfo";
 import { useTime } from "../../hooks/useTime";
 import ConfirmModal from "../modals/ConfirmModal";
+
+// import { socket } from "../../socket.js";
 
 const userData = users[1];
 
 const shiftTable = ["Утро", "День", "Ночь"];
 
 const PassengerMain = () => {
+  // const [isConnected, setIsConnected] = useState(socket.connected);
+
+  const [socketEvent, setSocketEvent] = useState([]);
+
+  // useEffect(() => {
+  //   function onConnect() {
+  //     setIsConnected(true);
+  //   }
+
+  //   function onDisconnect() {
+  //     setIsConnected(false);
+  //   }
+
+  //   function onSocketEvent(value) {
+  //     setSocketEvent((previous) => [...previous, value]);
+  //   }
+
+  //   socket.on("connect", onConnect);
+  //   socket.on("disconnect", onDisconnect);
+  //   socket.on("socketEvent", onSocketEvent);
+
+  //   return () => {
+  //     socket.off("connect", onConnect);
+  //     socket.off("disconnect", onDisconnect);
+  //     socket.off("socketEvent", onSocketEvent);
+  //   };
+  // }, []);
+
   const [user, setUser] = useState(null);
 
   const { today, tomorrow } = useTime();

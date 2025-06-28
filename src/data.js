@@ -198,7 +198,6 @@ export const busStopsActual = [
     times: ["05:30", "12:03", "20:39"],
     timeChanged: ['', '', ''],
     passengers: [
-
 ]
   },
   {
@@ -207,7 +206,6 @@ export const busStopsActual = [
     times: ["05:36", "12:12", "20:44"],
     timeChanged: ['', '', ''],
     passengers: [
-
   "Павлов Павел",
   "Николаев Николай",
 ]
@@ -219,7 +217,6 @@ export const busStopsActual = [
     timeChanged: ['', '', ''],
     passengers: [
   "Иванов Иван",
-
   "Павлов Павел",
   "Николаев Николай",
 ]
@@ -230,7 +227,6 @@ export const busStopsActual = [
     times: ["05:45", "12:20", "20:53"],
     timeChanged: ['', '', ''],
     passengers: [
-
   "Николаев Николай",
 ]
   },
@@ -260,7 +256,6 @@ export const busStopsActual = [
     times: ["05:55", "12:32", "21:03"],
     timeChanged: ['', '', ''],
     passengers: [
-
 ]
   },
   {
@@ -269,7 +264,6 @@ export const busStopsActual = [
     times: ["05:58", "12:35", "21:06"],
     timeChanged: ['', '', ''],
     passengers: [
-
 ]
   },
   {
@@ -301,7 +295,6 @@ export const busStopsActual = [
     timeChanged: ['', '', ''],
     passengers: [
   "Иванов Иван",
-
   "Николаев Николай",
 ]
   },
@@ -311,7 +304,6 @@ export const busStopsActual = [
     times: ["06:11", "12:52", "21:19"],
     timeChanged: ['', '', ''],
     passengers: [
-
 ]
   },
   {
@@ -320,7 +312,6 @@ export const busStopsActual = [
     times: ["06:12", "12:54", "21:21"],
     timeChanged: ['', '', ''],
     passengers: [
-
 ]
   },
   {
@@ -329,7 +320,6 @@ export const busStopsActual = [
     times: ["06:13", "12:56", "21:23"],
     timeChanged: ['', '', ''],
     passengers: [
-
   "Павлов Павел",
   "Николаев Николай",
 ]
@@ -341,7 +331,6 @@ export const busStopsActual = [
     timeChanged: ['', '', ''],
     passengers: [
   "Иванов Иван",
-
   "Николаев Николай",
 ]
   },
@@ -352,7 +341,6 @@ export const busStopsActual = [
     timeChanged: ['', '', ''],
     passengers: [
   "Иванов Иван",
-
 ]
   },
   {
@@ -361,7 +349,6 @@ export const busStopsActual = [
     times: ["06:19", "13:06", "21:32"],
     timeChanged: ['', '', ''],
     passengers: [
-
   "Николаев Николай",
 ]
   },
@@ -371,7 +358,6 @@ export const busStopsActual = [
     times: ["06:23", "13:09", "21:35"],
     timeChanged: ['', '', ''],
     passengers: [
-
 ]
   },
   {
@@ -393,7 +379,6 @@ export const busStopsActual = [
     timeChanged: ['', '', ''],
     passengers: [
   "Иванов Иван",
-
   "Павлов Павел",
   "Николаев Николай",
 ]
@@ -405,7 +390,6 @@ export const busStopsActual = [
     timeChanged: ['', '', ''],
     passengers: [
   "Иванов Иван",
-
 ]
   },
   {
@@ -414,7 +398,6 @@ export const busStopsActual = [
     times: ["06:34", "13:20", "21:46"],
     timeChanged: ['', '', ''],
     passengers: [
-
   "Николаев Николай",
 ]
   },
@@ -424,7 +407,6 @@ export const busStopsActual = [
     times: ["06:35", "13:21", "21:47"],
     timeChanged: ['', '', ''],
     passengers: [
-
   "Николаев Николай",
 ]
   },
@@ -435,7 +417,6 @@ export const busStopsActual = [
     timeChanged: ['', '', ''],
     passengers: [
   "Иванов Иван",
-
   "Николаев Николай",
 ]
   },
