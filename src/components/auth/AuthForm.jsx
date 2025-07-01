@@ -1,7 +1,8 @@
-import React, { useState, useContext, createContext, useEffect } from "react";
+import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { Navigate } from "react-router-dom";
 import LoadingSpinner from "../LoadingSpinner";
+import "./authForm.css";
 
 const AuthForm = () => {
   const { login, register, loading, setLoading, user, logout, isInitialized } =
@@ -10,16 +11,13 @@ const AuthForm = () => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
-    role: "PASSENGER",
   });
 
-  // Redirect if user is already authenticated
   if (isInitialized && user) {
     const rolePath = user.role.toLowerCase();
     return <Navigate to={`/${rolePath}`} replace />;
   }
 
-  // Show loading while checking authentication
   if (!isInitialized) {
     return <LoadingSpinner />;
   }
@@ -33,15 +31,16 @@ const AuthForm = () => {
     e.preventDefault();
 
     setLoading(true);
-    setTimeout(async () => {
-      try {
-        await login(formData);
-      } catch (error) {
-        console.error("Login error:", error);
-      } finally {
+
+    try {
+      await login(formData);
+    } catch (error) {
+      console.error("Login error:", error);
+    } finally {
+      setTimeout(() => {
         setLoading(false);
-      }
-    }, 300);
+      }, 300);
+    }
   };
 
   return (
@@ -74,14 +73,10 @@ const AuthForm = () => {
           </div>
 
           <button type="submit" className="submit-button" disabled={loading}>
-            {loading ? "Узнаем..." : "Войти"}
+            {loading ? "Входим..." : "Войти"}
           </button>
         </form>
       </div>
-
-      <div className="wrap">Зайдено как {JSON.stringify(user)}</div>
-
-      <button onClick={logout}>Выйти</button>
     </div>
   );
 };

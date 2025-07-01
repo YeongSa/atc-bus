@@ -22,8 +22,6 @@ const DriverMain = () => {
     });
   };
 
-  const confirmer = true;
-
   return (
     <div className="driverMain">
       <div className="date-selector">

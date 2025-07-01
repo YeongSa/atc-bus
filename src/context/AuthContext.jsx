@@ -13,12 +13,13 @@ const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
-  // Single state object to prevent multiple re-renders
   const [authState, setAuthState] = useState({
     user: null,
     loading: true,
     isInitialized: false,
   });
+
+  const [createdUser, setCreatedUser] = useState(null);
 
   const updateAuthState = useCallback(
     (updates, navigateTo = null) => {
@@ -66,6 +67,20 @@ export const AuthProvider = ({ children }) => {
       }, remainingTime);
 
       throw error;
+    }
+  };
+
+  const register = async (formData) => {
+    updateAuthState({ loading: true });
+
+    try {
+      const res = await apiRequest.post("/auth/register", formData);
+
+      if (res.data.user) setCreatedUser(res.data.user);
+    } catch (error) {
+      throw error;
+    } finally {
+      updateAuthState({ loading: false });
     }
   };
 
@@ -128,6 +143,7 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider
       value={{
         login,
+        register,
         logout,
         loading: authState.loading,
         setLoading: (loading) => updateAuthState({ loading }),

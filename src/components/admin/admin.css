@@ -1,0 +1,138 @@
+.admin-page {
+  background-color: var(--bg-secondary-dark);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border: 2px solid var(--bg-element-dark);
+  margin: 1rem auto;
+  padding: 0.5rem;
+}
+
+.admin-page h2 {
+  margin: 0.5rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.dashboard {
+  border-radius: 12px;
+  padding: 1.5rem 0.25rem;
+}
+
+.register-user {
+  width: 100%;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--selected2);
+
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, scale 0.1s;
+}
+
+.register-user a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem;
+  color: #fff;
+  text-decoration: none;
+}
+
+.register-user:hover,
+.register-user:focus {
+  background-color: var(--selected);
+  scale: 0.98;
+}
+
+.all-users-wrapper {
+  background: var(--bg-secondary-dark);
+  border-radius: 8px;
+  padding: 0.25rem;
+  margin-top: 1rem;
+}
+
+.all-users-wrapper h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.25rem;
+  margin-bottom: 1.5rem;
+  text-align: left;
+  border-bottom: 1px solid var(--text-dim);
+}
+
+.all-users {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.user {
+  background: var(--bg-element-dark);
+  display: grid;
+  grid-template-areas:
+    "name username role"
+    "phone phone phone";
+  border-radius: 8px;
+  color: var(--text-main);
+  font-size: 1rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  position: relative;
+}
+
+.user .name {
+  grid-area: name;
+}
+
+.user .username {
+  grid-area: username;
+}
+
+.user .role {
+  grid-area: role;
+}
+
+.user .phone {
+  grid-area: phone;
+  margin: 0 1rem;
+  border-top: 1px solid var(--text-dim);
+}
+
+.user .user-value {
+  color: #fff;
+}
+
+.delete {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: none;
+  background-color: crimson;
+  color: #fff;
+  cursor: pointer;
+}
+
+.user.admin {
+  border-left: 4px solid #f59e42;
+}
+.user.driver {
+  border-left: 4px solid #60a5fa;
+}
+.user.passenger {
+  border-left: 4px solid #22c55e;
+}
+
+.user p {
+  margin: 0 0.5rem;
+  flex: 1 1 0;
+  text-align: center;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+.user-field {
+  color: var(--text-main);
+}
