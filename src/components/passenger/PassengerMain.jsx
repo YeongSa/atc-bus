@@ -1,51 +1,36 @@
 import "./passengerMain.css";
-import { busStops, users, busStopsActual } from "../../data";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import UserInfo from "./UserInfo";
 import { useTime } from "../../hooks/useTime";
 import ConfirmModal from "../modals/ConfirmModal";
-
-// import { socket } from "../../socket.js";
-
-const userData = users[1];
-
-const shiftTable = ["Утро", "День", "Ночь"];
+import { useAuth } from "../../context/AuthContext";
+import { useApp } from "../../context/AppContext";
+import { v4 as uuid } from "uuid";
+import apiRequest from "../../utils/apiRequest";
+import { busStops } from "../../data";
 
 const PassengerMain = () => {
-  // const [isConnected, setIsConnected] = useState(socket.connected);
+  const isFirstRender = useRef(true);
 
-  const [socketEvent, setSocketEvent] = useState([]);
+  const { busStops, shiftTable } = useApp();
+  // const { shiftTable } = useApp();
+  const { user } = useAuth();
 
-  // useEffect(() => {
-  //   function onConnect() {
-  //     setIsConnected(true);
-  //   }
+  console.log(user);
 
-  //   function onDisconnect() {
-  //     setIsConnected(false);
-  //   }
+  const { today, tomorrow, shortDate } = useTime();
+  const [stops, setStops] = useState(
+    user.stops.length > 0
+      ? user.stops.filter((stop) => {
+          // console.log(stop.date >= today);
+          return stop.date >= today;
+        })
+      : []
+  );
 
-  //   function onSocketEvent(value) {
-  //     setSocketEvent((previous) => [...previous, value]);
-  //   }
-
-  //   socket.on("connect", onConnect);
-  //   socket.on("disconnect", onDisconnect);
-  //   socket.on("socketEvent", onSocketEvent);
-
-  //   return () => {
-  //     socket.off("connect", onConnect);
-  //     socket.off("disconnect", onDisconnect);
-  //     socket.off("socketEvent", onSocketEvent);
-  //   };
-  // }, []);
-
-  const [user, setUser] = useState(null);
-
-  const { today, tomorrow } = useTime();
+  const [searchQuery, setSearchQuery] = useState("");
 
   const [selectedStop, setSelectedStop] = useState(null);
-  const [searchQuery, setSearchQuery] = useState("");
   const [selectedDay, setSelectedDay] = useState(null);
   const [selectedShift, setSelectedShift] = useState(null);
 
@@ -60,43 +45,50 @@ const PassengerMain = () => {
 
   const accept = (replaces = false, id) => {
     const newStop = {
-      id: Math.random(),
-      date: selectedDay,
+      id: uuid(),
+      date: String(selectedDay),
       shift: selectedShift,
       stopId: selectedStop.id,
-      stopName: selectedStop.name,
-      busExpectedTime: selectedStop.times[selectedShift],
-      selectedAt: new Date(),
+      stop: { name: selectedStop.name },
     };
 
     if (replaces) {
-      setUser((prev) => ({
-        ...prev,
-        stops: prev.stops.map((stop) => (stop.id === id ? newStop : stop)),
-      }));
+      setStops((prev) => prev.map((stop) => (stop.id === id ? newStop : stop)));
     } else {
-      setUser((prev) => ({ ...prev, stops: [...prev.stops, newStop] }));
+      setStops((prev) => [...prev, newStop]);
     }
 
     reset();
   };
 
-  const deleteShift = (id) => {
-    setUser((prev) => {
-      const stops = prev.stops.filter((stop) => stop.id !== id);
-      return { ...prev, stops };
-    });
+  const addStops = async () => {
+    const { data } = await apiRequest.post("/stops/add", stops);
   };
 
-  useEffect(() => setUser(userData), []);
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
 
-  const filteredStops = busStops.filter((stop) =>
+    addStops();
+  }, [stops]);
+
+  const deleteShift = (id) => {
+    setStops((prev) => prev.filter((stop) => stop.id !== id));
+  };
+
+  const filteredStops = busStops?.filter((stop) =>
     stop.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
     <>
-      <UserInfo user={user} shiftTable={shiftTable} deleteShift={deleteShift} />
+      <UserInfo
+        stops={stops}
+        shiftTable={shiftTable}
+        deleteShift={deleteShift}
+      />
 
       <div className="passenger-main">
         <div className="selection-section">
@@ -104,26 +96,18 @@ const PassengerMain = () => {
             <h2>Выберите смену:</h2>
             <div className="day">
               <div onClick={() => setSelectedDay(today)}>
-                <span
-                  className={
-                    selectedDay?.short === today.short ? "shift-selected" : ""
-                  }
-                >
+                <span className={selectedDay === today ? "shift-selected" : ""}>
                   Сегодня
                 </span>
-                <p>{today.short}</p>
+                <p>{shortDate(today)}</p>
               </div>
               <div onClick={() => setSelectedDay(tomorrow)}>
                 <span
-                  className={
-                    selectedDay?.short === tomorrow.short
-                      ? "shift-selected"
-                      : ""
-                  }
+                  className={selectedDay === tomorrow ? "shift-selected" : ""}
                 >
                   Завтра
                 </span>
-                <p>{tomorrow.short}</p>
+                <p>{shortDate(tomorrow)}</p>
               </div>
             </div>
             <div className="shift">
@@ -161,7 +145,7 @@ const PassengerMain = () => {
         </div>
 
         <div className="stop-list">
-          {filteredStops.length > 0 ? (
+          {filteredStops?.length > 0 ? (
             filteredStops.map((stop) => (
               <div
                 key={stop.id}
@@ -225,7 +209,7 @@ const PassengerMain = () => {
           selectedStop={selectedStop}
           reset={reset}
           accept={accept}
-          userStops={user.stops}
+          userStops={stops}
           shiftTable={shiftTable}
         />
       )}

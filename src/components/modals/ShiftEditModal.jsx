@@ -1,3 +1,4 @@
+import { useTime } from "../../hooks/useTime";
 import "./shiftEditModal.css";
 
 const ShiftEditModal = ({
@@ -6,6 +7,8 @@ const ShiftEditModal = ({
   shiftTable,
   deleteShift,
 }) => {
+  const { shortDate } = useTime();
+
   const handleDelete = () => {
     deleteShift(selectedStop.id);
     setShowEditModal(false);
@@ -45,11 +48,13 @@ const ShiftEditModal = ({
               {shiftTable[selectedStop.shift]}
             </span>
             ,{" "}
-            <span className="text_bubble grey">{selectedStop.date.short}</span>{" "}
+            <span className="text_bubble grey">
+              {shortDate(Number(selectedStop.date))}
+            </span>{" "}
           </p>
           <p className="separator_p">на остановке </p>
           <p>
-            <span className="text_bubble grey">{selectedStop.stopName}</span>
+            <span className="text_bubble grey">{selectedStop.stop.name}</span>
           </p>
         </div>
 

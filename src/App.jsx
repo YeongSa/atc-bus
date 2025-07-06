@@ -15,6 +15,7 @@ import Unauthorized from "./components/unauthorized/Unauthorized";
 import LoadingSpinner from "./components/LoadingSpinner";
 import Register from "./components/auth/Register";
 import Admin from "./components/admin/Admin";
+import { AppProvider } from "./context/AppContext";
 
 const DefaultRoute = () => {
   const { user } = useAuth();
@@ -37,7 +38,7 @@ const AppContent = () => {
   return (
     <div className="app">
       <header>
-        <h1>ATCBUS - Demo 0.2</h1>
+        <h1>ATCBUS - Demo 0.3</h1>
         <p>Просмотр от лица</p>
         <NavLink to="/passenger">Пассажира</NavLink>
         <NavLink to="/driver">Водителя</NavLink>
@@ -76,7 +77,9 @@ function App() {
   return (
     <Router>
       <AuthProvider>
-        <AppContent />
+        <AppProvider>
+          <AppContent />
+        </AppProvider>
       </AuthProvider>
     </Router>
   );

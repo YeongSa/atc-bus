@@ -1,37 +1,53 @@
 import { useState } from "react";
 import "./admin.css";
 import { NavLink } from "react-router-dom";
+import apiRequest from "../../utils/apiRequest.js";
+import { busStops } from "../../data.js";
 
 const Admin = () => {
   const [users, setUsers] = useState([
-    {
-      id: 1,
-      username: "admin",
-      name: "Admin",
-      surname: "Admin",
-      role: "ADMIN",
-      phone: "-",
-      createdAt: "25 may",
-    },
-    {
-      id: 2,
-      username: "driver",
-      name: "Driver",
-      surname: "Driver",
-      role: "DRIVER",
-      phone: "+7-981-444-33-11",
-      createdAt: "26 may",
-    },
-    {
-      id: 3,
-      username: "passenger",
-      name: "Passenger",
-      surname: "Passenger",
-      role: "PASSENGER",
-      phone: "+7-981-444-33-22",
-      createdAt: "27 may",
-    },
+    // {
+    //   id: 1,
+    //   username: "admin",
+    //   name: "Admin",
+    //   surname: "Admin",
+    //   role: "ADMIN",
+    //   phone: "-",
+    //   createdAt: "25 may",
+    // },
+    // {
+    //   id: 2,
+    //   username: "driver",
+    //   name: "Driver",
+    //   surname: "Driver",
+    //   role: "DRIVER",
+    //   phone: "+7-981-444-33-11",
+    //   createdAt: "26 may",
+    // },
+    // {
+    //   id: 3,
+    //   username: "passenger",
+    //   name: "Passenger",
+    //   surname: "Passenger",
+    //   role: "PASSENGER",
+    //   phone: "+7-981-444-33-22",
+    //   createdAt: "27 may",
+    // },
   ]);
+
+  const loadStops = async () => {
+    const { data: stops } = await apiRequest.get("/stops/getAll");
+    console.log(stops);
+  };
+
+  const createStops = async () => {
+    const { data: createdBusStops } = await apiRequest.post(
+      "/stops/createBusStops",
+      busStops
+    );
+
+    console.log(createdBusStops);
+  };
 
   return (
     <div className="admin-page">
@@ -73,6 +89,9 @@ const Admin = () => {
             ))}
           </div>
         </div>
+
+        <button onClick={() => loadStops()}>Загрузить остановки</button>
+        <button onClick={() => createStops()}>Создать остановки</button>
       </div>
     </div>
   );

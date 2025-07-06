@@ -1,3 +1,4 @@
+import { useTime } from "../../hooks/useTime";
 import "./confirmModal.css";
 
 const ConfirmModal = ({
@@ -10,21 +11,10 @@ const ConfirmModal = ({
   accept,
   shiftTable,
 }) => {
-  const replacedShift = userStops.filter(
-    (stop) =>
-      new Date(
-        stop.date.full.getFullYear(),
-        stop.date.full.getMonth(),
-        stop.date.full.getDate()
-      ).getTime() ===
-      new Date(
-        selectedDay.full.getFullYear(),
-        selectedDay.full.getMonth(),
-        selectedDay.full.getDate()
-      ).getTime()
-  );
+  const { shortDate } = useTime();
+  console.log(userStops);
 
-  console.log(replacedShift);
+  const replacedShift = userStops?.filter((stop) => stop.date == selectedDay);
 
   return (
     <div className="modal">
@@ -40,7 +30,7 @@ const ConfirmModal = ({
         <div className="selections">
           <p>
             <span className="text_bubble blue">{selectedShift}</span>,{" "}
-            <span className="text_bubble blue">{selectedDay.short}</span>{" "}
+            <span className="text_bubble blue">{shortDate(selectedDay)}</span>{" "}
           </p>
           <p className="separator_p">на остановке </p>
           <p>
@@ -57,13 +47,13 @@ const ConfirmModal = ({
               </span>
               ,{" "}
               <span className="text_bubble red">
-                {replacedShift[0].date.short}
+                {shortDate(replacedShift[0].date)}
               </span>
             </p>
             <p className="separator_p">на остановке </p>
             <p>
               <span className="text_bubble red">
-                {replacedShift[0].stopName}
+                {replacedShift[0].stop.name}
               </span>
             </p>
 
